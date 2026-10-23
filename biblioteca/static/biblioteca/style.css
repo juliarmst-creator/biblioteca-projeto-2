@@ -1,0 +1,356 @@
+
+/* CORES PRINCIPAIS */
+:root {
+    --creme: #faf6f0;
+    --bege: #f0e5d8;
+    --bege-claro: #fffaf4;
+    --marrom: #79543b;
+    --marrom-escuro: #49301f;
+    --marrom-claro: #a17d60;
+    --texto: #38291f;
+    --cinza: #81756b;
+    --borda: #e7dcd0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--creme);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--marrom);
+}
+
+/* CABEÇALHO */
+.site-header {
+    background: var(--bege-claro);
+    border-bottom: 1px solid var(--borda);
+    box-shadow: 0 3px 15px rgba(73, 48, 31, 0.05);
+}
+
+.header-container {
+    max-width: 1500px;
+    margin: auto;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--marrom-escuro);
+    text-decoration: none;
+}
+
+.logo-icon {
+    font-size: 34px;
+}
+
+.logo-title {
+    font-family: Georgia, serif;
+    font-size: 27px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.logo-subtitle {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--marrom-claro);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 9px;
+    font-weight: 500;
+}
+
+nav a:hover,
+nav a.active {
+    background: var(--bege);
+}
+
+/* CONTEÚDO */
+.container {
+    max-width: 1500px;
+    min-height: 65vh;
+    margin: 45px auto;
+    padding: 0 30px;
+}
+
+h1, h2 {
+    font-family: Georgia, serif;
+    color: var(--marrom-escuro);
+}
+
+h1 {
+    font-size: 38px;
+    margin-bottom: 18px;
+}
+
+/* TABELAS */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(73, 48, 31, 0.06);
+}
+
+th {
+    background: var(--marrom);
+    color: white;
+    text-align: left;
+    padding: 15px;
+}
+
+td {
+    padding: 13px 15px;
+    border-bottom: 1px solid var(--borda);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* FORMULÁRIOS */
+select, input {
+    padding: 11px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    background: white;
+    color: var(--texto);
+    max-width: 100%;
+}
+
+button, .btn {
+    background: var(--marrom);
+    color: white;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button:hover, .btn:hover {
+    background: var(--marrom-escuro);
+}
+
+button:disabled {
+    background: #c8bcb0;
+    cursor: not-allowed;
+}
+
+/* CARDS DOS LIVROS */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 22px;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bege-claro);
+    border: 1px solid var(--borda);
+    border-radius: 13px;
+    padding: 14px;
+    box-shadow: 0 4px 15px rgba(73, 48, 31, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(73, 48, 31, 0.12);
+}
+
+.book-cover {
+    height: 260px;
+    background: var(--bege);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.cover-placeholder {
+    color: var(--marrom-claro);
+    text-align: center;
+    padding: 20px;
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.book-title {
+    font-family: Georgia, serif;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 1.4;
+    margin: 0 0 5px;
+}
+
+.book-author {
+    color: var(--cinza);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.availability {
+    align-self: flex-start;
+    padding: 5px 10px;
+    border-radius: 7px;
+    background: #e5eddf;
+    color: #427048;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.availability.unavailable {
+    background: #f5e0dc;
+    color: #a24d43;
+}
+
+.book-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.book-form select,
+.book-form button {
+    width: 100%;
+}
+
+/* MEMBROS */
+.members-section {
+    background: var(--bege-claro);
+    padding: 30px;
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    margin-top: 45px;
+}
+
+.member-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.member-card {
+    display: block;
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 18px;
+    text-decoration: none;
+    color: var(--marrom-escuro);
+}
+
+.member-card:hover {
+    background: var(--creme);
+    border-color: var(--marrom-claro);
+}
+
+/* MENSAGENS */
+.msg {
+    padding: 14px 18px;
+    border-radius: 9px;
+    margin-bottom: 20px;
+}
+
+.msg.success {
+    background: #e1f0df;
+    color: #356b3a;
+}
+
+.msg.error {
+    background: #fae1de;
+    color: #9b302a;
+}
+
+.msg.warning {
+    background: #fff0d5;
+    color: #94671b;
+}
+
+/* RODAPÉ */
+footer {
+    background: var(--bege);
+    border-top: 1px solid var(--borda);
+    padding: 25px;
+    text-align: center;
+    color: var(--marrom);
+    font-size: 13px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 800px) {
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .container {
+        margin: 30px auto;
+        padding: 0 18px;
+        overflow-x: auto;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 14px;
+    }
+
+    .book-cover {
+        height: 220px;
+    }
+}

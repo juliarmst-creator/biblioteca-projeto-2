@@ -1,0 +1,64 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block titulo %}Biblioteca IESB{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'biblioteca/style.css' %}">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+
+            <a href="{% url 'lista_livros' %}" class="logo">
+                <span class="logo-icon">📖</span>
+
+                <div>
+                    <div class="logo-title">Biblioteca IESB</div>
+                    <div class="logo-subtitle">Seu universo literário</div>
+                </div>
+            </a>
+
+            <nav>
+                <a href="{% url 'lista_livros' %}"
+                   class="{% if request.resolver_match.url_name == 'lista_livros' %}active{% endif %}">
+                    Acervo
+                </a>
+
+                <a href="{% url 'relatorio_livros' %}"
+                   class="{% if request.resolver_match.url_name == 'relatorio_livros' %}active{% endif %}">
+                    Relatórios
+                </a>
+
+                <a href="/admin/">Administração</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main class="container">
+
+        {% for message in messages %}
+            <div class="msg {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% block conteudo %}
+        {% endblock %}
+
+    </main>
+
+    <footer>
+        Biblioteca IESB &copy; 2026 —
+        Projeto de Construção de Backend
+    </footer>
+
+</body>
+</html>

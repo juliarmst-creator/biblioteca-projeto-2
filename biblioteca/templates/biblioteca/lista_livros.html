@@ -1,0 +1,122 @@
+
+{% extends 'biblioteca/base.html' %}
+
+{% block titulo %}Acervo | Biblioteca IESB{% endblock %}
+
+{% block conteudo %}
+
+<h1>Acervo de Livros</h1>
+
+<p>
+    Explore nossa coleção de livros e encontre sua próxima leitura.
+</p>
+
+<div class="book-grid">
+
+    {% for livro in livros %}
+
+    <article class="book-card">
+
+        <div class="book-cover">
+            {% if livro.capa %}
+                <img
+                    src="{{ livro.capa.url }}"
+                    alt="Capa de {{ livro.titulo }}"
+                >
+            {% else %}
+                <div class="cover-placeholder">
+                    📖
+                    <p>Capa indisponível</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="book-info">
+
+            <h2 class="book-title">
+                {{ livro.titulo }}
+            </h2>
+
+            <p class="book-author">
+                {{ livro.autor.nome }}
+            </p>
+
+            {% if livro.copias_disponiveis > 0 %}
+                <span class="availability">
+                    {{ livro.copias_disponiveis }} de
+                    {{ livro.copias_totais }} disponíveis
+                </span>
+            {% else %}
+                <span class="availability unavailable">
+                    Indisponível
+                </span>
+            {% endif %}
+
+            <form
+                method="post"
+                action="{% url 'emprestar_livro' livro.id %}"
+                class="book-form"
+            >
+                {% csrf_token %}
+
+                <select name="membro_id" required>
+                    {% for membro in membros %}
+                        <option value="{{ membro.id }}">
+                            {{ membro.nome }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                {% if livro.copias_disponiveis > 0 and membros %}
+                    <button type="submit">
+                        Emprestar livro
+                    </button>
+                {% else %}
+                    <button type="submit" disabled>
+                        Indisponível
+                    </button>
+                {% endif %}
+
+            </form>
+
+        </div>
+
+    </article>
+
+    {% empty %}
+
+        <p>
+            Nenhum livro cadastrado.
+            Use o Admin para cadastrar.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+<section class="members-section">
+
+    <h2>Empréstimos por membro</h2>
+
+    <div class="member-grid">
+
+        {% for membro in membros %}
+
+            <a
+                href="{% url 'meus_emprestimos' membro.id %}"
+                class="member-card"
+            >
+                📚 {{ membro.nome }}
+            </a>
+
+        {% empty %}
+
+            <p>Nenhum membro cadastrado.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
