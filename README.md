@@ -1,3 +1,15 @@
+# Biblioteca IESB — Sistema Online
+
+🌐 **Acesse a biblioteca funcionando:**
+
+https://juliarms.pythonanywhere.com/
+
+Projeto desenvolvido em Django para a disciplina Construção de Backend do IESB.
+
+O site permite visualizar o acervo de livros, suas capas, a disponibilidade e o relatório dos livros mais emprestados.
+
+---
+
 # Sistema de Biblioteca — Projeto 2
 
 Projeto desenvolvido para a disciplina Construção de Backend do IESB, utilizando Python e Django.
@@ -33,6 +45,19 @@ Executar `python manage.py test`.
 O projeto possui oito testes automatizados que verificam as regras de negócio.
 
 ## Capturas de tela
+
+### Acervo de livros
+![Acervo da Biblioteca IESB](prints/acervo.png.png)
+
+### Administração
+![Painel administrativo](prints/administracao.png.png)
+
+### Empréstimos
+![Empréstimos da biblioteca](prints/emprestimos.png.png)
+
+### Relatórios
+![Relatório de livros](prints/relatorios.png.png)
+
 
 As imagens do painel administrativo, acervo e empréstimos estão na pasta `prints/`.
 
