@@ -33,6 +33,7 @@ ALLOWED_HOSTS = os.getenv(
     '127.0.0.1,localhost'
 ).split(',')
 
+PUBLIC_DEMO = os.getenv('DJANGO_PUBLIC_DEMO', 'False').lower() == 'true'
 
 # Application definition
 

@@ -52,6 +52,8 @@
                 </span>
             {% endif %}
 
+            {% if pode_gerenciar %}
+
             <form
                 method="post"
                 action="{% url 'emprestar_livro' livro.id %}"
@@ -79,6 +81,8 @@
 
             </form>
 
+            {% endif %}
+
         </div>
 
     </article>
@@ -93,6 +97,8 @@
     {% endfor %}
 
 </div>
+
+{% if pode_gerenciar %}
 
 <section class="members-section">
 
@@ -118,5 +124,7 @@
     </div>
 
 </section>
+
+{% endif %}
 
 {% endblock %}

@@ -2,6 +2,8 @@
 from datetime import timedelta
 
 from django.contrib import messages
+from django.conf import settings
+from django.core.exceptions import PermissionDenied
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -12,15 +14,23 @@ from .models import Emprestimo, Livro, Membro
 
 def lista_livros(request):
     livros = Livro.objects.select_related('autor').order_by('ordem', 'titulo')
-    membros = Membro.objects.order_by('nome')
+
+    pode_gerenciar = not settings.PUBLIC_DEMO or request.user.is_staff
+
+    membros = Membro.objects.order_by('nome') if pode_gerenciar else []
+
     return render(request, 'biblioteca/lista_livros.html', {
         'livros': livros,
         'membros': membros,
+        'pode_gerenciar': pode_gerenciar,
     })
 
 
 @require_POST
 def emprestar_livro(request, livro_id):
+    if settings.PUBLIC_DEMO and not request.user.is_staff:
+        raise PermissionDenied("Empréstimos restritos à administração.")
+
     livro = get_object_or_404(Livro, pk=livro_id)
 
     # Regra de negócio 1: sem cópias disponíveis, não empresta.
@@ -45,6 +55,9 @@ def emprestar_livro(request, livro_id):
 
 @require_POST
 def devolver_livro(request, emprestimo_id):
+    if settings.PUBLIC_DEMO and not request.user.is_staff:
+        raise PermissionDenied("Devoluções restritas à administração.")
+
     emprestimo = get_object_or_404(Emprestimo, pk=emprestimo_id)
 
     # Proteção: devolver duas vezes inflaria o estoque.
@@ -64,6 +77,9 @@ def devolver_livro(request, emprestimo_id):
 
 
 def meus_emprestimos(request, membro_id):
+    if settings.PUBLIC_DEMO and not request.user.is_staff:
+        raise PermissionDenied("Consulta de membros restrita à administração.")
+    
     membro = get_object_or_404(Membro, pk=membro_id)
     emprestimos = membro.emprestimo_set.select_related('livro').order_by('-data_emprestimo')
     return render(request, 'biblioteca/meus_emprestimos.html', {
